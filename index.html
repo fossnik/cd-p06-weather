@@ -9,9 +9,28 @@
 <body>
   <div class="container">
     <div class="jumbotron">
-      <h1 class="text-center">Local Weather</h1>
-      <div class="conditions"></div>
+      <h1 class="text-center">The Weather Report</h1>
+      <em><div class="lead text-center" id="display_location"></div></em>
+
+      <div class="text-center">
+        <img id="icon_url" alt="Weather Image"></img>
       </div>
+
+        <div class="container-fluid" style="background-color: #aee;">
+          <p id="observation_time"></p>
+          <div class="container">
+            <table class="table-responsive">
+              <tbody>
+                <tr>
+                  <td>Weather Type</td>
+                  <td id="currentconditions"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+    </div>
   </div>
 </body>
 

@@ -39,10 +39,10 @@ $.ajax({
     var location = url.current_observation.display_location.full;
     var temp_f = url.current_observation.temp_f;
     // $(".conditions").html("Current temperature in " + location + " is: " + temp_f + "ºF");
-    $(".locale").html(location);
+    $("#display_location").html(url.current_observation.display_location.full);
     $("#currentconditions").html(url.current_observation.weather);
-    // $(".weatherdate").html(url.)
-    // $(".icon_url")
+    $("#observation_time").html(url.current_observation.observation_time);
+    $("#icon_url").attr("src", url.current_observation.icon_url);
     // $(".forecast_url")
   }
 });
