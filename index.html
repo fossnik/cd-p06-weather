@@ -16,6 +16,7 @@
         <img id="icon_url" alt="Weather Image" style="width: 100px"></img>
       </div>
 
+<!-- The Current Conditions -->
         <div id="tableBorder" class="container-fluid" style="background-color: grey;">
           <h2 class="text-center">Current Conditions:</h2>
           <div class="container">
@@ -29,6 +30,30 @@
                 <tr>
                   <td>Temperature</td>
                   <td id="temperature_string"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p></p>
+<!-- The Forecast -->
+        <div id="forecastBorder" class="container-fluid" style="background-color: green;">
+          <h2 class="text-center">Forecast:</h2>
+          <div class="container">
+            <table class="table" style="background: #abc;">
+              <tbody>
+                <tr>
+                  <td><div id="forecastDate"></div></td>
+                  <td><div id="forecast"></div></td>
+                </tr>
+                <tr>
+                  <td><div id="forecastDate1"></div></td>
+                  <td><div id="forecast1"></div></td>
+                </tr>
+                <tr>
+                  <td><div id="forecastDate2"></div></td>
+                  <td><div id="forecast2"></div></td>
                 </tr>
               </tbody>
             </table>
