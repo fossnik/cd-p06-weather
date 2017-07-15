@@ -1,54 +1,57 @@
-// var url_query_local = "https://api.wunderground.com/api/fd97edca66614862/conditions/geolookup/q/41.828855,-71.43304959999999.json";
-
 //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
 // Geolocal Coordinates grab & construct JSON url for wunderground.
 //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
 var api_key = "fd97edca66614862";
 
-var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
+ditch();
 
-function success(pos) {
-    url_query_local = 'https://api.wunderground.com/api/' +
-                      api_key + '/conditions/geolookup/q/' +
-                      pos.coords.latitude + ',' + pos.coords.longitude + '.json';
-
-    console.log(url_query_local);
-};
-
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-};
-
-navigator.geolocation.getCurrentPosition(success, error, options);
-
+function ditch() {
+  navigator.geolocation.getCurrentPosition(function(location) {
+      var latitude = location.coords.latitude;
+      var longitude = location.coords.longitude;
+      var json_query_url = 'https://api.wunderground.com/api/' +
+                            api_key + '/conditions/geolookup/q/' +
+                            latitude + ',' + longitude + '.json';
+      $.ajax({
+        url: json_query_url,
+        dataType: "json",
+        success: function(url) {
+          console.log(url);
+          $("#display_location").html(url.current_observation.display_location.full);
+          $("#currentconditions").html(url.current_observation.weather);
+          $("#observation_time").html(url.current_observation.observation_time);
+          $("#icon_url").attr("src", url.current_observation.icon_url);
+          $("#temperature_string").html(url.current_observation.temperature_string);
+        }
+      });
+  });
+}
 
 
 //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
 // AJAX for WUNDERGROUND.com weather API
 //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
-$.ajax({
-  // url: url_query_local,
-  url: "https://api.wunderground.com/api/fd97edca66614862/conditions/geolookup/q/41.828798,-71.4336524.json",
-  dataType: "json",
-  success: function(url) {
-    console.log(url);
-    var location = url.current_observation.display_location.full;
-    var temp_f = url.current_observation.temp_f;
-    // $(".conditions").html("Current temperature in " + location + " is: " + temp_f + "ºF");
-    $("#display_location").html(url.current_observation.display_location.full);
-    $("#currentconditions").html(url.current_observation.weather);
-    $("#observation_time").html(url.current_observation.observation_time);
-    $("#icon_url").attr("src", url.current_observation.icon_url);
-    // $(".forecast_url")
-  }
-});
-
-
-
+// $.ajax({
+//   url: navigator.geolocation.getCurrentPosition(function(location) {
+//       var latitude = location.coords.latitude;
+//       var longitude = location.coords.longitude;
+//       var json_query_url = 'https://api.wunderground.com/api/' +
+//                             api_key + '/conditions/geolookup/q/' +
+//                             latitude + ',' + longitude + '.json';
+//     console.log(json_query_url);
+//     return json_query_url;
+//   }),
+//   url: "https://api.wunderground.com/api/fd97edca66614862/conditions/geolookup/q/41.828798,-71.4336524.json",
+//   dataType: "json",
+//   success: function(url) {
+//     console.log(url);
+//     $("#display_location").html(url.current_observation.display_location.full);
+//     $("#currentconditions").html(url.current_observation.weather);
+//     $("#observation_time").html(url.current_observation.observation_time);
+//     $("#icon_url").attr("src", url.current_observation.icon_url);
+//     $("#temperature_string").html(url.current_observation.temperature_string);
+//   }
+// });
 
 
 //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
