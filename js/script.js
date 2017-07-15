@@ -12,20 +12,32 @@ function ditch() {
       var json_query_url = 'https://api.wunderground.com/api/' +
                             api_key + '/conditions/geolookup/q/' +
                             latitude + ',' + longitude + '.json';
+
+      var units = true;
       $.ajax({
         url: json_query_url,
         dataType: "json",
         success: function(url) {
-          console.log(url);
+          // console.log(url);
           $("#display_location").html(url.current_observation.display_location.full);
           $("#currentconditions").html(url.current_observation.weather);
           $("#observation_time").html(url.current_observation.observation_time);
           $("#icon_url").attr("src", url.current_observation.icon_url);
-          $("#temperature_string").html(url.current_observation.temperature_string);
+          $("#temperature_string").html(url.current_observation.temp_f + " F");
+          $("#unitsButton").click(function() {
+            if ( units === true ) {
+              $("#temperature_string").html(url.current_observation.temp_c + " C");
+              $("#unitsButton").html("Metric");
+            } else {
+              $("#temperature_string").html(url.current_observation.temp_f + " F");
+              $("#unitsButton").html("Normal");
+            }
+            units = !units;
+          });
         }
-      });
-  });
-}
+      }); <!-- END OF AJAX -->
+  }); <!-- END OF NAVIGATOR -->
+} <!-- END OF DITCH -->
 
 
 //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
