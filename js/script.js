@@ -3,7 +3,7 @@
 //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
 var api_key = "fd97edca66614862";
 
-ditch();
+ditch();  <!-- Obviously Awkward -->
 
 function ditch() {
   navigator.geolocation.getCurrentPosition(function(location) {
@@ -27,12 +27,24 @@ function ditch() {
           $("#unitsButton").click(function() {
             if ( units === true ) {
               $("#temperature_string").html(url.current_observation.temp_c + " C");
-              $("#unitsButton").html("Metric");
+              $("#unitsButton").html("Normal");
             } else {
               $("#temperature_string").html(url.current_observation.temp_f + " F");
-              $("#unitsButton").html("Normal");
+              $("#unitsButton").html("Metric");
             }
             units = !units;
+          });
+          $("#tableBorder").html(function() {  <!-- Modify container color by weather descriptor -->
+            var weatherDescriptor = url.current_observation.icon
+            if (weatherDescriptor.includes("cloudy")) {
+              $("#tableBorder").attr("style", "background-color: grey");
+            } else if (weatherDescriptor.includes("sunny")) {
+              $("#tableBorder").attr("style", "background-color: yellow");
+            } else if (weatherDescriptor.includes("rain")) {
+              $("#tableBorder").attr("style", "background-color: blue");
+            } else {
+              console.log("No Match");
+            }
           });
         }
       }); <!-- END OF AJAX -->

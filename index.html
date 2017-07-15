@@ -13,12 +13,11 @@
       <em><div class="lead text-center" id="display_location"></div></em>
 
       <div class="text-center">
-        <img id="icon_url" alt="Weather Image"></img>
+        <img id="icon_url" alt="Weather Image" style="width: 100px"></img>
       </div>
 
-      <button id="unitsButton" class="btn btn-primary" style="margin-bottom: 8px">Metric</button>
-
-        <div class="container-fluid" style="background-color: grey;">
+        <div id="tableBorder" class="container-fluid" style="background-color: grey;">
+          <h2 class="text-center">Current Conditions:</h2>
           <div class="container">
             <p></p>
             <table class="table" style="background: #aff;">
@@ -35,7 +34,9 @@
             </table>
           </div>
         </div>
-        <span id="observation_time" style="background: #fba"></span>
+
+        <div><span id="observation_time" class="text-center" style="background: #fba"></span></div>
+        <button id="unitsButton" class="btn btn-primary center" style="margin-bottom: 8px">Metric</button>
     </div>
   </div>
 </body>
