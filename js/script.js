@@ -81,6 +81,8 @@ function ditch() {
             } else {
               console.log("No Match");
             }
+
+          $("#wuiurl").attr("href", url.location.wuiurl);
           });
         }
       }); <!-- END OF AJAX -->
